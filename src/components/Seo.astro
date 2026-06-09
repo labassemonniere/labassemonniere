@@ -1,0 +1,28 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  name: site.name,
+  description: description,
+  telephone: site.phone,
+  email: site.email
+};
+---
+
+<title>{title}</title>
+
+<meta name="description" content={description} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

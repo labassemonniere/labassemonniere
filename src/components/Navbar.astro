@@ -1,0 +1,32 @@
+---
+import { site } from "../data/site";
+import { navigation } from "../data/navigation";
+---
+
+<nav class="sticky top-0 bg-white shadow-sm z-50">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="flex justify-between items-center h-20">
+
+      <a href="/" class="font-serif text-2xl font-semibold">
+        {site.name}
+      </a>
+
+      <ul class="flex gap-8">
+
+        {navigation.map((item) => (
+          <li>
+            <a href={item.href} class="hover:text-amber-700 transition">
+              {item.label}
+            </a>
+          </li>
+        ))}
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</nav>

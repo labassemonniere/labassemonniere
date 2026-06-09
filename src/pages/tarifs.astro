@@ -1,0 +1,89 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import { site } from "../data/site";
+import { pricing } from "../data/pricing";
+---
+
+<MainLayout
+  title={`Tarifs | ${site.name}`}
+  description="Consultez les tarifs et conditions de séjour de La Basse Monnière"
+>
+
+  <Navbar />
+
+  <!-- HERO -->
+  <header class="text-center py-16 px-4">
+
+    <h1 class="text-4xl md:text-6xl font-serif mb-4">
+      Tarifs & Informations
+    </h1>
+
+    <p class="text-stone-600">
+      Consultez nos prix et conditions de séjour
+    </p>
+
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-20 space-y-12">
+
+    <!-- BADGE -->
+    <div class="text-center">
+
+      <span class="inline-block bg-stone-100 px-4 py-2 rounded-full text-sm">
+        {pricing.badge}
+      </span>
+
+    </div>
+
+    <!-- PRICING GRID -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      {pricing.seasons.map((item) => (
+        <div class="bg-white shadow rounded-xl p-6 text-center">
+
+          <h3 class="text-xl font-serif mb-2">
+            {item.season}
+          </h3>
+
+          <p class="text-stone-500 mb-4">
+            {item.period}
+          </p>
+          
+          <p class="text-stone-500 mb-4">
+            {item.duree}
+          </p>
+
+          <p class="text-2xl font-semibold text-amber-700">
+            {item.price}
+          </p>
+
+
+
+        </div>
+      ))}
+
+    </section>
+
+    <!-- RULES -->
+    <section class="bg-white shadow rounded-xl p-6 md:p-10">
+
+      <h2 class="text-2xl md:text-3xl font-serif mb-6">
+        Réglementation du séjour
+      </h2>
+
+      <ul class="space-y-3 text-stone-700">
+
+        {pricing.rules.map((rule) => (
+          <li class="leading-relaxed">
+            • {rule}
+          </li>
+        ))}
+
+      </ul>
+
+    </section>
+
+  </main>
+
+</MainLayout>

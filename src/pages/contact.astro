@@ -1,0 +1,99 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import { site } from "../data/site";
+---
+
+<MainLayout
+  title={`Contact | ${site.name}`}
+  description="Contact et accès à La Basse Monnière, chambres d'hôtes en Vendée"
+>
+
+  <Navbar />
+
+  <!-- HERO -->
+  <header class="text-center py-16 px-4">
+
+    <h1 class="text-4xl md:text-6xl font-serif mb-4">
+      Contact & Accès
+    </h1>
+
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-20 space-y-12">
+
+    <!-- CONTACT CARD -->
+    <section class="bg-white shadow rounded-xl p-6 md:p-10">
+
+      <div class="space-y-3 text-base md:text-lg">
+
+        <p>
+            <strong>📍 Adresse :</strong> {site.contact.address} 
+        </p>
+
+        <p>
+            <strong>✉️ Email :</strong> {site.contact.email} 
+            <a href={`mailto:${site.contact.email}`} class="btn">
+                Envoyer un email
+            </a>
+        </p>
+
+        <p>
+            <strong>📞 Téléphone :</strong> {site.contact.phone}
+            <a href={`tel:${site.contact.phone}`} class="btn">
+                Appeler
+            </a>
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- MAP -->
+    <section class="rounded-xl overflow-hidden shadow">
+
+      <iframe
+        src={site.contact.map.src}
+        class="w-full h-80 md:h-[450px]"
+        loading="lazy"
+      ></iframe>
+
+    </section>
+
+    <!-- DIRECTIONS -->
+    <section class="space-y-4">
+
+      <h2 class="text-2xl md:text-3xl font-serif">
+        📍 Comment nous trouver
+      </h2>
+
+      <div class="space-y-4 text-stone-700 leading-relaxed">
+
+        {site.contact.directions.map((text) => (
+          <p>{text}</p>
+        ))}
+
+      </div>
+
+    </section>
+
+    <!-- BOOKING -->
+    <section class="space-y-4">
+
+      <h2 class="text-2xl md:text-3xl font-serif">
+        📅 Comment réserver
+      </h2>
+
+      <div class="space-y-4 text-stone-700 leading-relaxed">
+
+        {site.contact.booking.map((text) => (
+          <p>{text}</p>
+        ))}
+
+      </div>
+
+    </section>
+
+  </main>
+
+</MainLayout>

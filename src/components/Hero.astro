@@ -1,0 +1,25 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="h-[70vh] flex items-center justify-center text-center bg-cover bg-center relative">
+
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <div class="relative text-white px-4">
+
+    <h1 class="text-5xl md:text-7xl font-serif mb-4">
+      {site.name}
+    </h1>
+
+    <p class="text-xl">
+      {site.tagline}
+    </p>
+
+    <p class="mt-4">
+      📞 {site.phone} • ✉️ {site.email}
+    </p>
+
+  </div>
+
+</section>

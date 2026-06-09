@@ -1,0 +1,22 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="max-w-4xl mx-auto py-16 px-6">
+
+    <h2
+      class="text-4xl font-serif mb-8 text-center"
+    >
+      {site.introSection.welcomeTag}
+    </h2>
+
+    <div class="space-y-6 text-lg leading-relaxed">
+
+        {site.introSection.introText.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+
+
+    </div>
+
+</section>

@@ -1,0 +1,51 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import ActivityCard from "../components/ActivityCard.astro";
+import { site } from "../data/site";
+import { activities } from "../data/activities";
+---
+
+<MainLayout
+  title={`Activités | ${site.name}`}
+  description="Découvrez les meilleures activités autour du Puy du Fou et de la Vendée"
+>
+
+  <Navbar />
+
+  <!-- HERO -->
+  <header class="text-center py-16 px-4">
+
+    <h1 class="text-4xl md:text-6xl font-serif mb-4">
+      Activités à proximité
+    </h1>
+
+    <p class="text-stone-600 max-w-2xl mx-auto">
+      Découvrez les plus beaux lieux de Vendée autour de La Basse Monnière
+    </p>
+
+  </header>
+
+  <!-- INTRO -->
+  <section class="max-w-3xl mx-auto px-4 mb-12 text-center">
+
+    <p class="text-lg text-stone-700">
+      Voici une sélection des meilleures activités autour du Puy du Fou et de la Vendée.
+    </p>
+
+  </section>
+
+  <!-- GRID -->
+  <main class="max-w-6xl mx-auto px-4 pb-20">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      {activities.map((activity) => (
+        <ActivityCard activity={activity} />
+      ))}
+
+    </div>
+
+  </main>
+
+</MainLayout>

@@ -1,0 +1,47 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import RoomCard from "../components/RoomCard.astro";
+import { site } from "../data/site";
+import { rooms } from "../data/rooms";
+import Calendar from "../components/Calendar.astro";
+---
+
+<MainLayout
+  title={`Chambres | ${site.name}`}
+  description="Découvrez nos chambres d'hôtes en Vendée"
+>
+
+  <Navbar />
+
+  <!-- HERO SIMPLE -->
+  <section class="text-center py-16 px-4">
+
+    <h1 class="text-4xl md:text-6xl font-serif mb-4">
+      Nos Chambres
+    </h1>
+
+    <p class="text-stone-600 max-w-2xl mx-auto">
+      Nous vous proposons deux chambres pour vous reposer dans notre établissement
+    </p>
+
+  </section>
+
+  <!-- ROOMS -->
+  <main>
+
+    {rooms.map((room) => (
+      <section class="mb-16">
+
+        <RoomCard room={room} />
+
+        <div class="mt-6">
+          <Calendar roomId={room.id} />
+        </div>
+
+      </section>
+    ))}
+
+  </main>
+
+</MainLayout>
