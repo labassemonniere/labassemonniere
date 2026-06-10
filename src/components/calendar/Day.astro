@@ -1,0 +1,13 @@
+---
+const { day, closedDays } = Astro.props;
+
+const dateStr = day.toISOString().split("T")[0];
+const isClosed = closedDays.has(dateStr);
+---
+
+<div
+  class={`aspect-square flex items-center justify-center text-xs rounded
+  ${isClosed ? "bg-red-500 text-white" : "text-stone-700"}`}
+>
+  {day.getDate()}
+</div>

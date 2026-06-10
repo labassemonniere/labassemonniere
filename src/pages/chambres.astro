@@ -2,9 +2,24 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import RoomCard from "../components/RoomCard.astro";
+import Calendar from "../components/calendar/Calendar.astro";
+import { getRoomBookings } from "../lib/bookingslib";
+
 import { site } from "../data/site";
 import { rooms } from "../data/rooms";
-import Calendar from "../components/Calendar.astro";
+
+// 👉 on récupère les bookings pour chaque room AVANT le render
+const roomsWithBookings = await Promise.all(
+  rooms.map(async (room) => {
+    const bookings = await getRoomBookings(room.id);
+
+    return {
+      ...room,
+      bookings,
+    };
+  })
+);
+---
 ---
 
 <MainLayout
@@ -14,9 +29,8 @@ import Calendar from "../components/Calendar.astro";
 
   <Navbar />
 
-  <!-- HERO SIMPLE -->
+  <!-- HERO -->
   <section class="text-center py-16 px-4">
-
     <h1 class="text-4xl md:text-6xl font-serif mb-4">
       Nos Chambres
     </h1>
@@ -24,24 +38,38 @@ import Calendar from "../components/Calendar.astro";
     <p class="text-stone-600 max-w-2xl mx-auto">
       Nous vous proposons deux chambres pour vous reposer dans notre établissement
     </p>
-
   </section>
 
   <!-- ROOMS -->
-  <main>
-
-    {rooms.map((room) => (
+  <!-- <main>
+    {roomsWithBookings.map((room) => (
       <section class="mb-16">
-
         <RoomCard room={room} />
 
         <div class="mt-6">
-          <Calendar roomId={room.id} />
+          <Calendar bookings={room.bookings} />
         </div>
-
       </section>
     ))}
+  </main> -->
 
-  </main>
 
+  <main>
+  {roomsWithBookings.map((room) => {
+    console.log("ROOM RENDER:", room.id);
+
+    return (
+      <section class="mb-16">
+        <RoomCard room={room} />
+
+        <div class="mt-6">
+          <Calendar
+            bookings={room.bookings}
+            roomId={room.id}
+          />
+        </div>
+      </section>
+    );
+  })}
+</main>
 </MainLayout>

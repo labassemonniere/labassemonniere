@@ -1,0 +1,17 @@
+---
+const { monthLabel, onPrev, onNext } = Astro.props;
+---
+
+<div class="flex items-center justify-between mb-4">
+  <button class="px-3 py-1 text-sm bg-stone-100 rounded">
+    ←
+  </button>
+
+  <h3 class="text-lg font-medium">
+    {monthLabel}
+  </h3>
+
+  <button class="px-3 py-1 text-sm bg-stone-100 rounded">
+    →
+  </button>
+</div>

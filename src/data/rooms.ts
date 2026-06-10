@@ -3,7 +3,7 @@ export const rooms = [
     id: "guernoilles",
     name: "Les Guernoïlles",
     subtitle: "Chambre familiale dans le bocage vendéen",
-    ical: "https://booking.com/ch1.ics",
+    ical: "https://ical.booking.com/v1/export?t=060871ce-4e33-4c9c-a416-161c88d14ce2",
     description: [
       "Les Guernoïlles, qui signifie grenouilles en patois du bocage vendéen, est une chambre familiale.",
 
@@ -24,7 +24,7 @@ export const rooms = [
     id: "lauge",
     name: "La Lauge",
     subtitle: "Chambre moderne dans une dépendance en pierre",
-    ical: "https://booking.com/ch2.ics",
+    ical: "https://ical.booking.com/v1/export?t=4f7a76ee-00ef-4ad8-afaf-fa55a63680d9",
     description: [
       "Cette chambre aménagée dans une dépendance en pierre de la maison est moderne tout en gardant le charme de l'ancien.",
 

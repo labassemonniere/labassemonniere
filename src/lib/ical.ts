@@ -1,13 +1,17 @@
 import ical from "ical";
 
 export async function fetchICal(url: string) {
-  const response = await fetch(url);
+  const res = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+    },
+  });
 
-  if (!response.ok) {
-    throw new Error("Impossible de charger le calendrier iCal");
+  if (!res.ok) {
+    throw new Error("Impossible de charger l'iCal");
   }
 
-  const text = await response.text();
+  const text = await res.text();
 
   const data = ical.parseICS(text);
 
