@@ -1,3 +1,23 @@
+const guernoillesImages = Object.values(
+  import.meta.glob(
+    "../assets/chambres/guernoilles/*.{jpg,JPG,jpeg,JPEG,png,PNG}",
+    {
+      eager: true,
+      import: "default"
+    }
+  )
+);
+
+const laugeImages = Object.values(
+  import.meta.glob(
+    "../assets/chambres/lauge/*.{jpg,JPG,jpeg,JPEG,png,PNG}",
+    {
+      eager: true,
+      import: "default"
+    }
+  )
+);
+
 export const rooms = [
   {
     id: "guernoilles",
@@ -14,10 +34,7 @@ export const rooms = [
       "Attention : la kitchenette ne possède pas de plaques de cuisson (une chambre d’hôtes n’est pas un lieu de cuisine)."
     ],
 
-    images: [
-      "/photos/chambre-bleue.jpg",
-      "/photos/chambre-bleue-terrasse.jpg"
-    ]
+    images: guernoillesImages
   },
 
   {
@@ -37,8 +54,6 @@ export const rooms = [
       "Un accès Wi-Fi gratuit est disponible."
     ],
 
-    images: [
-      "/photos/exterieur-lauge.jpg"
-    ]
+    images: laugeImages
   }
 ];

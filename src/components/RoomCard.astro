@@ -1,51 +1,36 @@
 ---
-interface Props {
-  room: {
-    name: string;
-    subtitle: string;
-    description: string[];
-    images: string[];
-  };
-}
+import ImageCarousel from "./carousel/ImageCarousel.astro";
 
 const { room } = Astro.props;
+console.log(room.images);
 ---
 
-<section class="py-12">
+<section class="max-w-6xl mx-auto px-4">
 
-  <div class="max-w-5xl mx-auto px-4">
-
-    <!-- TITRE -->
-    <h2 class="text-3xl md:text-4xl font-serif mb-2">
+  
+  <div class="mt-8">
+    <h2 class="text-3xl font-serif">
       {room.name}
     </h2>
-
-    <p class="text-stone-600 mb-6">
+    
+    <p class="text-stone-500 mt-2">
       {room.subtitle}
     </p>
-
-    <!-- IMAGES (mobile first stack) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-
-      {room.images.map((img) => (
-        <img
-          src={img}
-          alt={room.name}
-          class="w-full h-64 md:h-80 object-cover rounded-xl shadow"
-        />
+    
+    
+    
+    <div class="mt-6 space-y-4">
+      {room.description.map((paragraph: string) => (
+        <p class="text-stone-700 leading-relaxed">
+          {paragraph}
+        </p>
       ))}
-
     </div>
-
-    <!-- TEXTE -->
-    <div class="space-y-4 text-base md:text-lg leading-relaxed">
-
-      {room.description.map((text) => (
-        <p>{text}</p>
-      ))}
-
-    </div>
-
+    
+    <ImageCarousel
+      images={room.images}
+      roomId={room.id}
+    />
   </div>
 
 </section>
