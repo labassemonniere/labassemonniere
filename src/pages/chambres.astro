@@ -2,7 +2,6 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import RoomCard from "../components/RoomCard.astro";
-import Calendar from "../components/calendar/Calendar.astro";
 import { getRoomBookings } from "../lib/bookingslib";
 
 import { site } from "../data/site";
@@ -40,20 +39,6 @@ const roomsWithBookings = await Promise.all(
     </p>
   </section>
 
-  <!-- ROOMS -->
-  <!-- <main>
-    {roomsWithBookings.map((room) => (
-      <section class="mb-16">
-        <RoomCard room={room} />
-
-        <div class="mt-6">
-          <Calendar bookings={room.bookings} />
-        </div>
-      </section>
-    ))}
-  </main> -->
-
-
   <main>
   {roomsWithBookings.map((room) => {
     console.log("ROOM RENDER:", room.id);
@@ -61,13 +46,6 @@ const roomsWithBookings = await Promise.all(
     return (
       <section class="mb-16">
         <RoomCard room={room} />
-
-        <div class="mt-6">
-          <Calendar
-            bookings={room.bookings}
-            roomId={room.id}
-          />
-        </div>
       </section>
     );
   })}
