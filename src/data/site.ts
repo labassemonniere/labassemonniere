@@ -14,7 +14,9 @@ export const site = {
     seo: {
         homeTitle: "La Basse Monnière | Chambres d'hôtes près du Puy du Fou",
         homeDescription:
-        "Séjournez dans des chambres d'hôtes au calme à 8 min du Puy du Fou."
+        "Séjournez dans des chambres d'hôtes au calme à 8 min du Puy du Fou.",
+        socialImage: "/maison1.jpg",
+        url: "https://labassemonniere.netlify.app/",
     },
 
     introSection: {

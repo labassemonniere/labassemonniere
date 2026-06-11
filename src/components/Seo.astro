@@ -1,5 +1,7 @@
 ---
 import { site } from "../data/site";
+const image =
+  `${site.seo.url}${site.seo.socialImage}`;
 
 interface Props {
   title: string;
@@ -24,5 +26,5 @@ const structuredData = {
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-
+<meta property="og:image" content={image} />
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
