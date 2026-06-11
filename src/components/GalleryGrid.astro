@@ -1,0 +1,278 @@
+---
+const { images } = Astro.props;
+---
+
+<div
+  class="
+    grid
+    grid-cols-2
+    md:grid-cols-3
+    lg:grid-cols-4
+    gap-3
+  "
+>
+
+  {images.map((image: any, index: number) => (
+
+    <button
+      class="
+        overflow-hidden
+        rounded-2xl
+        shadow-sm
+      "
+      data-gallery-index={index}
+    >
+
+      <img
+        src={image.src}
+        alt=""
+        loading="lazy"
+        class="
+          w-full
+          aspect-square
+          object-cover
+          hover:scale-105
+          transition
+          duration-300
+        "
+      />
+
+    </button>
+
+  ))}
+
+</div>
+
+<!-- Lightbox -->
+
+<div
+  id="gallery-modal"
+  class="
+    hidden
+    fixed
+    inset-0
+    z-50
+    bg-black/90
+    p-4
+  "
+>
+
+  <button
+    id="gallery-close"
+    class="
+      absolute
+      top-4
+      right-4
+      text-white
+      text-4xl
+    "
+  >
+    ×
+  </button>
+
+  <button
+    id="gallery-prev"
+    class="
+      absolute
+      left-2
+      md:left-8
+      top-1/2
+      -translate-y-1/2
+      text-white
+      text-4xl
+    "
+  >
+    ‹
+  </button>
+
+  <button
+    id="gallery-next"
+    class="
+      absolute
+      right-2
+      md:right-8
+      top-1/2
+      -translate-y-1/2
+      text-white
+      text-4xl
+    "
+  >
+    ›
+  </button>
+
+  <div
+    class="
+      h-full
+      flex
+      items-center
+      justify-center
+    "
+  >
+
+    <img
+      id="gallery-image"
+      src=""
+      alt=""
+      class="
+        max-h-[90vh]
+        max-w-full
+        object-contain
+      "
+    />
+
+  </div>
+
+  <div
+    id="gallery-counter"
+    class="
+      absolute
+      bottom-6
+      left-1/2
+      -translate-x-1/2
+      text-white
+    "
+  ></div>
+
+</div>
+
+<script define:vars={{ images }}>
+
+  let current = 0;
+
+  const modal =
+    document.getElementById("gallery-modal");
+
+  const image =
+    document.getElementById("gallery-image");
+
+  const counter =
+    document.getElementById("gallery-counter");
+
+  function update() {
+
+    image.src = images[current].src;
+
+    counter.textContent =
+      `${current + 1} / ${images.length}`;
+  }
+
+  document
+    .querySelectorAll("[data-gallery-index]")
+    .forEach((button) => {
+
+      button.addEventListener("click", () => {
+
+        current = Number(
+          button.getAttribute(
+            "data-gallery-index"
+          )
+        );
+
+        update();
+
+        modal.classList.remove("hidden");
+      });
+    });
+
+  document
+    .getElementById("gallery-close")
+    ?.addEventListener("click", () => {
+
+      modal.classList.add("hidden");
+    });
+
+  document
+    .getElementById("gallery-prev")
+    ?.addEventListener("click", () => {
+
+      current =
+        (current - 1 + images.length)
+        % images.length;
+
+      update();
+    });
+
+  document
+    .getElementById("gallery-next")
+    ?.addEventListener("click", () => {
+
+      current =
+        (current + 1)
+        % images.length;
+
+      update();
+    });
+
+  // clavier
+
+  document.addEventListener("keydown", (e) => {
+
+    if (modal.classList.contains("hidden"))
+      return;
+
+    if (e.key === "ArrowLeft") {
+
+      current =
+        (current - 1 + images.length)
+        % images.length;
+
+      update();
+    }
+
+    if (e.key === "ArrowRight") {
+
+      current =
+        (current + 1)
+        % images.length;
+
+      update();
+    }
+
+    if (e.key === "Escape") {
+
+      modal.classList.add("hidden");
+    }
+  });
+
+  // swipe mobile
+
+  let startX = 0;
+
+  image?.addEventListener(
+    "touchstart",
+    (e) => {
+
+      startX =
+        e.touches[0].clientX;
+    }
+  );
+
+  image?.addEventListener(
+    "touchend",
+    (e) => {
+
+      const diff =
+        startX -
+        e.changedTouches[0].clientX;
+
+      if (diff > 50) {
+
+        current =
+          (current + 1)
+          % images.length;
+
+        update();
+      }
+
+      if (diff < -50) {
+
+        current =
+          (current - 1 + images.length)
+          % images.length;
+
+        update();
+      }
+    }
+  );
+
+</script>

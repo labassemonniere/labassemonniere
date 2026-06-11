@@ -1,0 +1,46 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+
+import GalleryGrid from "../components/GalleryGrid.astro";
+
+import { site } from "../data/site";
+import { galleryImages } from "../data/gallery";
+---
+
+<MainLayout
+  title={`Galerie | ${site.name}`}
+  description="Découvrez La Basse Monnière en images"
+>
+
+  <Navbar />
+
+  <section class="text-center py-16 px-4">
+
+    <h1 class="text-4xl md:text-6xl font-serif">
+      Galerie Photos
+    </h1>
+
+    <p class="mt-4 text-stone-600">
+      Découvrez la maison, les chambres,
+      le jardin et les environs.
+    </p>
+
+  </section>
+
+  <main
+    class="
+      max-w-7xl
+      mx-auto
+      px-4
+      pb-20
+    "
+  >
+
+    <GalleryGrid
+      images={galleryImages}
+    />
+
+  </main>
+
+</MainLayout>
