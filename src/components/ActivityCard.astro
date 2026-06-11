@@ -1,30 +1,46 @@
 ---
-interface Props {
-  activity: {
-    title: string;
-    description: string;
-    image: string;
-  };
-}
+import { Image } from "astro:assets";
 
 const { activity } = Astro.props;
 ---
 
-<article class="rounded-xl overflow-hidden shadow hover:shadow-lg transition bg-white">
+<article
+  class="
+    rounded-2xl
+    overflow-hidden
+    bg-white
+    shadow-md
+    hover:shadow-xl
+    transition
+    duration-300
+  "
+>
 
-  <img
+  <Image
     src={activity.image}
     alt={activity.title}
     class="w-full h-56 object-cover"
+    widths={[400, 800]}
   />
 
   <div class="p-5">
 
-    <h3 class="text-xl font-serif mb-2">
+    <h3
+      class="
+        text-xl
+        font-serif
+        mb-3
+      "
+    >
       {activity.title}
     </h3>
 
-    <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+    <p
+      class="
+        text-stone-600
+        leading-relaxed
+      "
+    >
       {activity.description}
     </p>
 

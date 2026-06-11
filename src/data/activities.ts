@@ -1,42 +1,60 @@
+import puyDuFou from "../assets/zactivites/puydufou.jpg";
+import veniseVerte from "../assets/zactivites/la-venise-verte.jpg";
+import tiffauges from "../assets/zactivites/chateau-de-tiffauges.jpg";
+import haras from "../assets/zactivites/haras-de-la-vendee.jpg";
+import futuroscope from "../assets/zactivites/futuroscope.jpg";
+import cotes from "../assets/zactivites/les-sables-d-olonnes.jpg";
+
+export const activitiesPage = {
+  title: "Activités à proximité",
+
+  subtitle:
+    "Découvrez les plus beaux lieux de Vendée autour de La Basse Monnière",
+
+  intro:
+    "Voici une sélection des meilleures activités autour du Puy du Fou et de la Vendée."
+};
+
 export const activities = [
   {
     title: "Puy du Fou",
-    description: "Le parc de spectacles historique le plus célèbre de France.",
-    image: "/images/activites/puy-du-fou.jpg"
+    description:
+      "Le parc de spectacles historique le plus célèbre de France.",
+    image: puyDuFou
   },
 
   {
     title: "Venise Verte",
-    description: "Balade magique en barque dans le Marais poitevin.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Marais_Poitevin_Venise_Verte.jpg"
+    description:
+      "Balade magique en barque dans le Marais poitevin.",
+    image: veniseVerte
   },
 
   {
     title: "Château de Tiffauges",
-    description: "Forteresse médiévale et spectacles de machines de guerre.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ch%C3%A2teau_de_Tiffauges.jpg"
+    description:
+      "Forteresse médiévale et spectacles de machines de guerre.",
+    image: tiffauges
   },
 
   {
     title: "Haras de la Vendée",
-    description: "Chevaux, spectacles et animations familiales.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/4/4a/Haras_de_la_Vend%C3%A9e.jpg"
+    description:
+      "Chevaux, spectacles et animations familiales.",
+    image: haras
   },
 
   {
     title: "Futuroscope",
-    description: "Parc futuriste et expériences immersives.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/2/2f/Futuroscope_entr%C3%A9e.jpg"
+    description:
+      "Parc futuriste et expériences immersives.",
+    image: futuroscope
   },
 
   {
     title: "Côtes Vendéennes",
-    description: "Plages, îles et paysages océaniques magnifiques.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/3/3d/Plage_des_Sables_d%27Olonne.jpg"
+    description:
+      "Plages, îles et paysages océaniques magnifiques.",
+    image: cotes
   }
 ];
