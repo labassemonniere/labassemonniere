@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import { site } from "../data/site";
+import ContactForm from "../components/ContactForm.astro";
 ---
 
 <MainLayout
@@ -32,22 +33,24 @@ import { site } from "../data/site";
         </p>
 
         <p>
-            <strong>✉️ Email :</strong> {site.contact.email} 
+            
             <a href={`mailto:${site.contact.email}`} class="btn">
-                Envoyer un email
+                <strong>✉️ Email :</strong> {site.contact.email} 
             </a>
         </p>
 
         <p>
-            <strong>📞 Téléphone :</strong> {site.contact.phone}
+            
             <a href={`tel:${site.contact.phone}`} class="btn">
-                Appeler
+                <strong>📞 Téléphone :</strong> {site.contact.phone}
             </a>
         </p>
 
       </div>
 
     </section>
+
+    <ContactForm />
 
     <!-- MAP -->
     <section class="rounded-xl overflow-hidden shadow">

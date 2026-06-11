@@ -1,25 +1,79 @@
 ---
 import { Image } from "astro:assets";
-import hero from "../assets/accueil/maison.jpg";
+import maison from "../../src/assets/maison/maison4.jpg";
+
 import { site } from "../data/site";
 ---
 
-<section class="h-[70vh] flex items-center justify-center text-center bg-cover bg-center relative">
+<section class="relative h-[70vh] overflow-hidden">
 
-  <div class="absolute inset-0 bg-black/40"></div>
+  <!-- Photo de fond -->
+  <Image
+    src={maison}
+    alt="La Basse Monnière"
+    class="absolute inset-0 h-full w-full object-cover"
+    widths={[768, 1280, 1920]}
+    loading="eager"
+  />
 
-  <div class="relative text-white px-4">
- 
-    <h1 class="text-5xl md:text-7xl font-serif mb-4">
+  <!-- Overlay sombre -->
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <!-- Contenu -->
+  <div
+    class="
+      relative
+      z-10
+      h-full
+      flex
+      flex-col
+      items-center
+      justify-center
+      text-center
+      text-white
+      px-4
+    "
+  >
+
+    <h1
+      class="
+        text-4xl
+        sm:text-5xl
+        md:text-7xl
+        font-serif
+        drop-shadow-lg
+      "
+    >
       {site.name}
     </h1>
 
-    <p class="text-xl">
+    <p
+      class="
+        mt-4
+        text-lg
+        md:text-2xl
+        max-w-2xl
+        drop-shadow-md
+      "
+    >
       {site.tagline}
     </p>
 
-    <p class="mt-4">
-      📞 {site.phone} • ✉️ {site.email}
+    <p
+      class="
+        mt-6
+        text-sm
+        md:text-base
+        drop-shadow-md
+      "
+    >
+      📞  <a href={`tel:${site.contact.phone}`} class="btn">
+                {site.phone}
+            </a>
+      <span class="mx-2">•</span>
+      ✉️  <a href={`mailto:${site.contact.email}`} class="btn">
+                {site.email}
+            </a>
     </p>
 
   </div>
