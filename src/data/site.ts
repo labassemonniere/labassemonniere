@@ -3,7 +3,7 @@ export const site = {
 
     tagline: "Chambres d'hôtes à la campagne",
 
-    phone: "07 82 92 24 98",
+    phone: "07 82 91 24 98",
     email: "labassemonniere@gmail.com",
 
     description:
