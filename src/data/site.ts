@@ -16,7 +16,7 @@ export const site = {
         homeDescription:
         "Séjournez dans des chambres d'hôtes au calme à 8 min du Puy du Fou.",
         socialImage: "/maison1.jpg",
-        url: "https://labassemonniere.netlify.app/",
+        url: "https://labassemonniere.netlify.app",
     },
 
     introSection: {
