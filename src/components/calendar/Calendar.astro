@@ -1,36 +1,31 @@
 ---
-import Day from "./Day.astro";
-import { buildMonth } from "../../lib/calendar/buildMonth";
-
 const { bookings, roomId } = Astro.props;
-
-const closedDays = new Set();
-
-for (const b of bookings) {
-  const start = new Date(b.start);
-  const end = new Date(b.end);
-
-  let d = new Date(start);
-
-  while (d < end) {
-    closedDays.add(d.toISOString().split("T")[0]);
-    d.setDate(d.getDate() + 1);
-  }
-}
 
 const initialMonth = new Date();
 ---
 
 <section class="max-w-md mx-auto px-4 py-6">
-
   <div id={`calendar-root-${roomId}`}></div>
-
 </section>
 
 <script define:vars={{ bookings, initialMonth, roomId }}>
   let current = new Date(initialMonth);
 
-  const buildMonth = (date) => {
+  function formatLocalDate(date) {
+    const year = date.getFullYear();
+
+    const month = String(
+      date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      date.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  function buildMonth(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
 
@@ -39,7 +34,10 @@ const initialMonth = new Date();
 
     const days = [];
 
-    const startPadding = first.getDay() === 0 ? 6 : first.getDay() - 1;
+    const startPadding =
+      first.getDay() === 0
+        ? 6
+        : first.getDay() - 1;
 
     for (let i = startPadding; i > 0; i--) {
       days.push(new Date(year, month, 1 - i));
@@ -50,62 +48,137 @@ const initialMonth = new Date();
     }
 
     return days;
-  };
+  }
 
-  function render() {
-    console.log("roomId", roomId);
-    const root = document.getElementById(`calendar-root-${roomId}`);
+  function buildClosedDays() {
+    const closed = new Set();
 
-    const days = buildMonth(current);
+    bookings.forEach((booking) => {
+      const start = new Date(booking.start);
+      const end = new Date(booking.end);
 
-    const closedDays = new Set();
+      let currentDay = new Date(start);
 
-    bookings.forEach(b => {
-      const start = new Date(b.start);
-      const end = new Date(b.end);
+      while (currentDay < end) {
+        closed.add(
+          formatLocalDate(currentDay)
+        );
 
-      let d = new Date(start);
-
-      while (d < end) {
-        closedDays.add(d.toISOString().split("T")[0]);
-        d.setDate(d.getDate() + 1);
+        currentDay.setDate(
+          currentDay.getDate() + 1
+        );
       }
     });
 
-    const monthLabel = current.toLocaleDateString("fr-FR", {
-      month: "long",
-      year: "numeric"
-    });
+    return closed;
+  }
+
+  function render() {
+    const root =
+      document.getElementById(
+        `calendar-root-${roomId}`
+      );
+
+    if (!root) return;
+
+    const days = buildMonth(current);
+
+    const closedDays = buildClosedDays();
+
+    const monthLabel =
+      current.toLocaleDateString(
+        "fr-FR",
+        {
+          month: "long",
+          year: "numeric",
+        }
+      );
 
     root.innerHTML = `
       <div class="mb-4 flex items-center justify-between">
-        <button id="prev-${roomId}" class="px-3 py-1 bg-stone-100 rounded">←</button>
-        <h3 class="font-medium">${monthLabel}</h3>
-        <button id="next-${roomId}" class="px-3 py-1 bg-stone-100 rounded">→</button>
+        <button
+          id="prev-${roomId}"
+          class="px-3 py-1 bg-stone-100 rounded hover:bg-stone-200"
+        >
+          ←
+        </button>
+
+        <h3 class="font-medium capitalize">
+          ${monthLabel}
+        </h3>
+
+        <button
+          id="next-${roomId}"
+          class="px-3 py-1 bg-stone-100 rounded hover:bg-stone-200"
+        >
+          →
+        </button>
       </div>
 
       <div class="grid grid-cols-7 gap-1 text-xs sm:text-sm">
-        ${days.map(d => {
-          const dateStr = d.toISOString().split("T")[0];
-          const isClosed = closedDays.has(dateStr);
 
-          return `
-            <div class="aspect-square flex items-center justify-center rounded
-              ${isClosed ? "bg-red-500 text-white" : "text-stone-700"}">
-              ${d.getDate()}
+        ${["L","M","M","J","V","S","D"]
+          .map(day => `
+            <div class="text-center font-medium text-stone-500 py-1">
+              ${day}
             </div>
-          `;
-        }).join("")}
+          `)
+          .join("")}
+
+        ${days
+          .map((day) => {
+
+            const dateStr =
+              formatLocalDate(day);
+
+            const isClosed =
+              closedDays.has(dateStr);
+
+            return `
+              <div
+                class="
+                  aspect-square
+                  flex
+                  items-center
+                  justify-center
+                  rounded
+                  ${
+                    isClosed
+                      ? "bg-red-500 text-white"
+                      : "bg-green-50 text-stone-700"
+                  }
+                "
+              >
+                ${day.getDate()}
+              </div>
+            `;
+          })
+          .join("")}
+
       </div>
     `;
 
-    document.getElementById(`prev-${roomId}`).onclick = () => {
-      current.setMonth(current.getMonth() - 1);
+    document.getElementById(
+      `prev-${roomId}`
+    ).onclick = () => {
+      current = new Date(
+        current.getFullYear(),
+        current.getMonth() - 1,
+        1
+      );
+
       render();
     };
 
-    document.getElementById(`next-${roomId}`).onclick = () => {
-      current.setMonth(current.getMonth() + 1);
+    document.getElementById(
+      `next-${roomId}`
+    ).onclick = () => {
+      current = new Date(
+        current.getFullYear(),
+        current.getMonth() + 1,
+        1
+      );
+
       render();
     };
   }
