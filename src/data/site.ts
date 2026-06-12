@@ -22,9 +22,9 @@ export const site = {
     introSection: {
         welcomeTag : "Bienvenue à La Basse Monnière",
         introText: [
-            "Nous vous proposons deux chambres d’hôtes modernes et confortables, situées au calme de la campagne, à seulement quelques minutes du Puy du Fou.",
+            "Venez vous ressourcer dans notre maison d’hôtes, nichée au cœur de la campagne vendéenne à seulement quelques minutes du Puy du Fou.",
 
-            "Profitez d’un séjour reposant dans une maison chaleureuse pouvant accueillir jusqu’à 5 personnes.",
+            "Avec ses deux chambres indépendantes, modernes et confortables, elle peut accueillir jusqu’à 5 personnes pour un séjour placé sous le signe du calme et de la détente.",
 
             "Nous serons ravis de vous accueillir avec notre chien Néo.",
 
